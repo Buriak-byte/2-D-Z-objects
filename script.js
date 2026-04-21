@@ -94,46 +94,29 @@ console.log(getAllPropValues(arr, "exp"))
 
 
 
-const allProducuts = [
-  { name: "milk", count: 3, price: 60 },
-  { name: "butter", count: 1, price: 100 },
-  { name: "bread", count: 2, price: 30 },
-  { name: "egg", count: 30, price: 6 },
+const allProdcuts = [
+  { product: "sandwich", price: 20, count: 1 },
+  { product: "milk", price: 55, count: 2 },
+  { product: "butter", price: 80, count: 3 },
 ];
-
-// Напиши функцію calculateTotalPrice(allProdcuts, productName), яка отримує масив об'єктів та ім'я продукту (значення властивості name). Повертає загальну вартість продукту (ціна * кількість).
-// function calculateTotalPrice(allProducuts){
-//     for (const product of allProducuts) {
-//         const product2 = product
-//     }
-  
-// }
-// console.log(calculateTotalPrice(allProducuts));
-//2
-/*
- * Типів транзацкій всього два.
- * Можна покласти або зняти гроші з рахунку.
- */
+function calculateTotalPrice(allProdcuts, productName) {
+  for (const product of allProdcuts) {
+    if (product.product === productName) {
+      return product.price * product.count;
+    }
+  }
+  return 0;
+}
+console.log(calculateTotalPrice(allProdcuts, "butter"));
 const Transaction = {
   DEPOSIT: "deposit",
   WITHDRAW: "withdraw",
 };
-
-/*ласт
- * Кожна транзакція - це об'єкт з вивостями: id, type і amount
- */
 const account = {
-  // Поточний баланс рахунку
+ 
   balance: 0,
-
-  // Історія транзакцій
-
   transactions: [],
-  /*
-   * Метод створює і повертає об'єкт транзакції.
-   * Приймає суму і тип транзакції.
-   */
-
+  
   createTransaction(amount, type) {
     const everyTrancsaction = {
       id: 1,
@@ -142,36 +125,18 @@ const account = {
     };
     return everyTrancsaction;
   },
-  /*
-   * Метод відповідає за додавання суми до балансу.
-   * Приймає суму танзакції.
-   * Викликає createTransaction для створення об'єкта транзакції
-   * після чого додає його в історію транзакцій
-   */
+ 
   deposit(amount) {
     account.balance += amount;
     const callForFunction = this.createTransaction(amount, Transaction.DEPOSIT);
     this.transactions.push(callForFunction);
   },
 
-  /*
-   * Метод відповідає за зняття суми з балансу.
-   * Приймає суму танзакції.
-   * Викликає createTransaction для створення об'єкта транзакції
-   * після чого додає його в історію транзакцій.
-   *
-   * Якщо amount більше, ніж поточний баланс, виводь повідомлення
-   * про те, що зняття такої суми не можливо, недостатньо коштів.
-   */
+  
   withdraw(amount) {},
 
-  /*
-   * Метод повертає поточний баланс
-   */
   getBalance() {},
-  /*
-   * Метод шукає і повертає об'єкт транзакції по id
-   */
+  
   getTransactionDetails(id) {
     for (const Transaction of this.transactions) {
       if (Transaction.id === id) {
@@ -182,11 +147,6 @@ const account = {
     }
   },
 
-  /*
-
-   * Метод повертає кількість коштів
-   * певного типу транзакції з усієї історії транзакцій
-   */
   getTransactionTotal(type) {
     let hightransaction = 0;
 
